@@ -11,6 +11,7 @@
 	<groupId>com.shopex</groupId>
 	<artifactId>microservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>microservice</name>
 	<description>A online stock trading platform</description>
 	<url/>
@@ -20,6 +21,10 @@
 	<developers>
 		<developer/>
 	</developers>
+	<modules>
+		<module>customer</module>
+		<module>stock</module>
+	</modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
