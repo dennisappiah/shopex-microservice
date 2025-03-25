@@ -2,6 +2,7 @@ package com.shopex.customer.service;
 
 import com.shopex.common.dto.CustomerInformation;
 import com.shopex.common.exceptions.GlobalExceptions;
+import com.shopex.customer.dto.CreateCustomerRequest;
 import com.shopex.customer.mapper.EntityDtoMapper;
 import com.shopex.customer.model.Customer;
 import com.shopex.customer.repository.CustomerRepository;
@@ -46,5 +47,12 @@ public class CustomerService {
                 })
                 .doOnNext(customerInfo -> log.debug("Generated CustomerInformation: {}", customerInfo))
                 .doOnError(error -> log.error("Error building customer information for customerId: {}", customer.getId(), error));
+    }
+
+    public Mono<CreateCustomerRequest> saveCustomer(Mono<CreateCustomerRequest> mono){
+        return mono
+                .map(EntityDtoMapper::toEntity)
+                .flatMap(this.customerRepository::save)
+                .map(EntityDtoMapper::toDto);
     }
 }

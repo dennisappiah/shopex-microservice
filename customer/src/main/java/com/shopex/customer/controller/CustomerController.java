@@ -3,8 +3,10 @@ package com.shopex.customer.controller;
 import com.shopex.common.dto.CustomerInformation;
 import com.shopex.common.dto.StockTradeRequest;
 import com.shopex.common.dto.StockTradeResponse;
+import com.shopex.customer.dto.CreateCustomerRequest;
 import com.shopex.customer.service.CustomerService;
 import com.shopex.customer.service.TradeService;
+import com.shopex.customer.validators.RequestValidator;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,4 +47,24 @@ public class CustomerController {
                                     customerId, request, error));
                 });
     }
+
+
+    @PostMapping
+    public Mono<CreateCustomerRequest> saveCustomer(@RequestBody Mono<CreateCustomerRequest> mono) {
+        return mono.transform(RequestValidator.validate())
+                .doOnNext(request -> log.info("Received customer creation request: {}", request))
+                .doOnError(validationError -> log.error("Validation failed for customer creation request", validationError))
+                .flatMap(validatedRequest ->
+                        customerService.saveCustomer(Mono.just(validatedRequest))
+                                .thenReturn(validatedRequest)
+                )
+                .onErrorResume(error -> {
+                    log.error("Unexpected error during customer creation process", error);
+                    return Mono.error(error);
+                });
+    }
+
+
+
+
 }

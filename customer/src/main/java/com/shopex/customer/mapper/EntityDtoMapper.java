@@ -5,6 +5,7 @@ import com.shopex.common.dto.Holding;
 import com.shopex.common.dto.StockTradeRequest;
 import com.shopex.common.dto.StockTradeResponse;
 import com.shopex.common.domain.Ticker;
+import com.shopex.customer.dto.CreateCustomerRequest;
 import com.shopex.customer.model.Customer;
 import com.shopex.customer.model.PortfolioItem;
 
@@ -50,6 +51,24 @@ public class EntityDtoMapper {
                 stockTradeRequest.tradeAction(),
                 stockTradeRequest.totalPrice(),
                 balance
+        );
+    }
+
+    // maps customer request dto to customer entity
+    public static Customer toEntity(CreateCustomerRequest customerDto){
+        var customer = new Customer();
+        customer.setName(customerDto.name());
+        customer.setBalance(customerDto.balance());
+
+        return customer;
+    }
+
+    // maps entity to customer request dto
+    public static CreateCustomerRequest toDto(Customer customer) {
+        return new CreateCustomerRequest(
+                customer.getId(),
+                customer.getName(),
+                customer.getBalance()
         );
     }
 

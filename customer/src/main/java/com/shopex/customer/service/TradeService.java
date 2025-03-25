@@ -23,6 +23,7 @@ public class TradeService {
     private final PortfolioItemRepository portfolioItemRepository;
     private static final Logger log = LoggerFactory.getLogger(TradeService.class);
 
+
     @Transactional
     public Mono<StockTradeResponse> trade(Integer customerId, StockTradeRequest tradeRequest) {
         log.info("Processing trade request: CustomerId={}, Action={}, Ticker={}, Quantity={}",
@@ -39,6 +40,7 @@ public class TradeService {
 
         };
     }
+
 
     private Mono<StockTradeResponse> buyStock(Integer customerId, StockTradeRequest tradeRequest) {
         log.debug("Initiating buy stock process. CustomerId={}, Ticker={}", customerId, tradeRequest.ticker());
