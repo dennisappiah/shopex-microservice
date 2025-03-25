@@ -3,7 +3,6 @@ package com.shopex.aggregator.client;
 import com.shopex.aggregator.dto.PriceUpdate;
 import com.shopex.aggregator.dto.StockPriceResponse;
 import com.shopex.common.domain.Ticker;
-import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -15,13 +14,18 @@ import java.time.Duration;
 import java.util.Objects;
 
 
-@AllArgsConstructor
 public class StockServiceClient {
 
     private static final Logger log = LoggerFactory.getLogger(StockServiceClient.class);
 
     private final WebClient client;
     private Flux<PriceUpdate> flux;
+
+
+    public StockServiceClient(WebClient client) {
+        this.client = client;
+    }
+
 
 
     public Mono<StockPriceResponse> getStockPrice(Ticker ticker) {
