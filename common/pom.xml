@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>customer</artifactId>
+    <artifactId>common</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -17,15 +17,4 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
-    <dependencies>
-        <dependency>
-            <groupId>com.shopex</groupId>
-            <artifactId>common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-
-<!--    -->
 </project>

@@ -1,7 +1,8 @@
 package com.shopex.customer.service;
 
-import com.shopex.customer.dto.CustomerInformation;
-import com.shopex.customer.exceptions.ApplicationExceptions;
+
+import com.shopex.common.dto.CustomerInformation;
+import com.shopex.common.exceptions.GlobalExceptions;
 import com.shopex.customer.mapper.EntityDtoMapper;
 import com.shopex.customer.model.Customer;
 import com.shopex.customer.repository.CustomerRepository;
@@ -9,6 +10,7 @@ import com.shopex.customer.repository.PortfolioItemRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
+
 
 @Service
 @AllArgsConstructor
@@ -19,7 +21,7 @@ public class CustomerService {
 
     public Mono<CustomerInformation> getCustomerInformation(Integer customerId){
         return this.customerRepository.findById(customerId)
-                .switchIfEmpty(ApplicationExceptions.customerNotFound(customerId))
+                .switchIfEmpty(GlobalExceptions.customerNotFound(customerId))
                 .flatMap(this::buildCustomerInformation);
 
     }

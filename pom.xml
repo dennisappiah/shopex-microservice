@@ -23,7 +23,8 @@
 	</developers>
 	<modules>
 		<module>customer</module>
-		<module>stock</module>
+        <module>aggregator</module>
+		<module>common</module>
 	</modules>
 	<scm>
 		<connection/>

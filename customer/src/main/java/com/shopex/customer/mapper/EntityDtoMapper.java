@@ -1,7 +1,10 @@
 package com.shopex.customer.mapper;
 
-import com.shopex.customer.dto.CustomerInformation;
-import com.shopex.customer.dto.Holding;
+import com.shopex.common.dto.CustomerInformation;
+import com.shopex.common.dto.Holding;
+import com.shopex.common.dto.StockTradeRequest;
+import com.shopex.common.dto.StockTradeResponse;
+import com.shopex.common.domain.Ticker;
 import com.shopex.customer.model.Customer;
 import com.shopex.customer.model.PortfolioItem;
 
@@ -9,9 +12,10 @@ import java.util.List;
 
 public class EntityDtoMapper {
 
-    public static CustomerInformation toCustomerInformationDto
-            (Customer customer, List<PortfolioItem> portfolioItems){
-
+    public static CustomerInformation toCustomerInformationDto(
+            Customer customer,
+            List<PortfolioItem> portfolioItems
+    ) {
         var holdings = portfolioItems
                 .stream()
                 .map(item -> new Holding(item.getTicker(), item.getQuantity()))
@@ -26,5 +30,27 @@ public class EntityDtoMapper {
     }
 
 
+    public static PortfolioItem toPortfolioItemDto(Integer customerId, Ticker ticker){
+       var portfolioItem = new PortfolioItem();
+       portfolioItem.setCustomerId(customerId);
+       portfolioItem.setTicker(ticker);
+       portfolioItem.setQuantity(0);
+
+       return portfolioItem;
+    }
+
+    // building the stock Trade Response
+    public static StockTradeResponse toStockTradeResponse(StockTradeRequest stockTradeRequest,
+                                                          Integer customerId, Integer balance ){
+        return new StockTradeResponse(
+                customerId,
+                stockTradeRequest.ticker(),
+                stockTradeRequest.price(),
+                stockTradeRequest.quantity(),
+                stockTradeRequest.tradeAction(),
+                stockTradeRequest.totalPrice(),
+                balance
+        );
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.shopex.customer.model;
 
-import com.shopex.customer.domain.Ticker;
+
+import com.shopex.common.domain.Ticker;
 import lombok.Data;
 import org.springframework.data.relational.core.mapping.Table;
 

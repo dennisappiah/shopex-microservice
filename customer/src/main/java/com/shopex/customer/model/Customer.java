@@ -12,5 +12,5 @@ public class Customer {
     private String name;
     private Integer balance;
 
-    // List<PortfolioItem> holdings
+    // List<PortfolioItem> portfolioItems
 }
