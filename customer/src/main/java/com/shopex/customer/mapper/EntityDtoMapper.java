@@ -6,10 +6,12 @@ import com.shopex.common.dto.StockTradeRequest;
 import com.shopex.common.dto.StockTradeResponse;
 import com.shopex.common.domain.Ticker;
 import com.shopex.customer.dto.CreateCustomerRequest;
+import com.shopex.customer.dto.CreateCustomerResponse;
 import com.shopex.customer.model.Customer;
 import com.shopex.customer.model.PortfolioItem;
 
 import java.util.List;
+import java.util.UUID;
 
 public class EntityDtoMapper {
 
@@ -31,7 +33,7 @@ public class EntityDtoMapper {
     }
 
 
-    public static PortfolioItem toPortfolioItemDto(Integer customerId, Ticker ticker){
+    public static PortfolioItem toPortfolioItemDto(UUID customerId, Ticker ticker){
        var portfolioItem = new PortfolioItem();
        portfolioItem.setCustomerId(customerId);
        portfolioItem.setTicker(ticker);
@@ -42,7 +44,7 @@ public class EntityDtoMapper {
 
     // building the stock Trade Response
     public static StockTradeResponse toStockTradeResponse(StockTradeRequest stockTradeRequest,
-                                                          Integer customerId, Integer balance ){
+                                                          UUID customerId, Integer balance ){
         return new StockTradeResponse(
                 customerId,
                 stockTradeRequest.ticker(),
@@ -55,17 +57,15 @@ public class EntityDtoMapper {
     }
 
     // maps customer request dto to customer entity
-    public static Customer toEntity(CreateCustomerRequest customerDto){
+    public static Customer toEntity(CreateCustomerRequest customerDto) {
         var customer = new Customer();
         customer.setName(customerDto.name());
         customer.setBalance(customerDto.balance());
-
         return customer;
     }
 
-    // maps entity to customer request dto
-    public static CreateCustomerRequest toDto(Customer customer) {
-        return new CreateCustomerRequest(
+    public static CreateCustomerResponse toDto(Customer customer) {
+        return new CreateCustomerResponse(
                 customer.getId(),
                 customer.getName(),
                 customer.getBalance()

@@ -3,6 +3,7 @@ package com.shopex.customer.service;
 import com.shopex.common.dto.CustomerInformation;
 import com.shopex.common.exceptions.GlobalExceptions;
 import com.shopex.customer.dto.CreateCustomerRequest;
+import com.shopex.customer.dto.CreateCustomerResponse;
 import com.shopex.customer.mapper.EntityDtoMapper;
 import com.shopex.customer.model.Customer;
 import com.shopex.customer.repository.CustomerRepository;
@@ -14,14 +15,18 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
+import java.util.UUID;
+
 @Service
 @AllArgsConstructor
 public class CustomerService {
+
     private final CustomerRepository customerRepository;
     private final PortfolioItemRepository portfolioItemRepository;
+
     private static final Logger log = LoggerFactory.getLogger(CustomerService.class);
 
-    public Mono<CustomerInformation> getCustomerInformation(Integer customerId) {
+    public Mono<CustomerInformation> getCustomerInformation(UUID customerId) {
         log.info("Fetching customer information for customerId: {}", customerId);
 
         return this.customerRepository.findById(customerId)
@@ -49,7 +54,7 @@ public class CustomerService {
                 .doOnError(error -> log.error("Error building customer information for customerId: {}", customer.getId(), error));
     }
 
-    public Mono<CreateCustomerRequest> saveCustomer(Mono<CreateCustomerRequest> mono){
+    public Mono<CreateCustomerResponse> saveCustomer(Mono<CreateCustomerRequest> mono) {
         return mono
                 .map(EntityDtoMapper::toEntity)
                 .flatMap(this.customerRepository::save)

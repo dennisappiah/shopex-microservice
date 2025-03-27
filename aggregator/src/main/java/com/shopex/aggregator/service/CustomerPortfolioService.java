@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Service
 @AllArgsConstructor
 public class CustomerPortfolioService {
@@ -19,11 +21,11 @@ public class CustomerPortfolioService {
     private final StockServiceClient stockServiceClient;
     private final CustomerServiceClient customerServiceClient;
 
-    public Mono<CustomerInformation> getCustomerInformation(Integer customerId) {
+    public Mono<CustomerInformation> getCustomerInformation(UUID customerId) {
         return this.customerServiceClient.getCustomerInformation(customerId);
     }
 
-    public Mono<StockTradeResponse> trade(Integer customerId, TradeRequest request) {
+    public Mono<StockTradeResponse> trade(UUID customerId, TradeRequest request) {
         return this.stockServiceClient.getStockPrice(request.ticker())
                 .map(StockPriceResponse::price)
                 .map(price -> this.toStockTradeRequest(request, price))

@@ -7,7 +7,7 @@ spring:
   
   # R2DBC specific configuration
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/customerdb
+    url: r2dbc:postgresql://localhost:5432/customersdb
     username: root
     password: password
     pool:

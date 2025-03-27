@@ -16,16 +16,20 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
+import java.util.UUID;
+
 @Service
 @AllArgsConstructor
 public class TradeService {
+
     private final CustomerRepository customerRepository;
     private final PortfolioItemRepository portfolioItemRepository;
+
     private static final Logger log = LoggerFactory.getLogger(TradeService.class);
 
 
     @Transactional
-    public Mono<StockTradeResponse> trade(Integer customerId, StockTradeRequest tradeRequest) {
+    public Mono<StockTradeResponse> trade(UUID customerId, StockTradeRequest tradeRequest) {
         log.info("Processing trade request: CustomerId={}, Action={}, Ticker={}, Quantity={}",
                 customerId, tradeRequest.tradeAction(), tradeRequest.ticker(), tradeRequest.quantity());
 
@@ -42,7 +46,7 @@ public class TradeService {
     }
 
 
-    private Mono<StockTradeResponse> buyStock(Integer customerId, StockTradeRequest tradeRequest) {
+    private Mono<StockTradeResponse> buyStock(UUID customerId, StockTradeRequest tradeRequest) {
         log.debug("Initiating buy stock process. CustomerId={}, Ticker={}", customerId, tradeRequest.ticker());
 
         var customerMono = this.customerRepository.findById(customerId)
@@ -87,7 +91,7 @@ public class TradeService {
                 .thenReturn(response);
     }
 
-    private Mono<StockTradeResponse> sellStock(Integer customerId, StockTradeRequest tradeRequest) {
+    private Mono<StockTradeResponse> sellStock(UUID customerId, StockTradeRequest tradeRequest) {
         log.debug("Initiating sell stock process. CustomerId={}, Ticker={}", customerId, tradeRequest.ticker());
 
         var customerMono = this.customerRepository.findById(customerId)

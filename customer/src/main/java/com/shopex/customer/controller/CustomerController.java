@@ -4,17 +4,20 @@ import com.shopex.common.dto.CustomerInformation;
 import com.shopex.common.dto.StockTradeRequest;
 import com.shopex.common.dto.StockTradeResponse;
 import com.shopex.customer.dto.CreateCustomerRequest;
+import com.shopex.customer.dto.CreateCustomerResponse;
 import com.shopex.customer.service.CustomerService;
 import com.shopex.customer.service.TradeService;
 import com.shopex.customer.validators.RequestValidator;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-@Controller
+import java.util.UUID;
+
+@RestController
 @RequestMapping("api/customers")
 @AllArgsConstructor
 public class CustomerController {
@@ -23,7 +26,7 @@ public class CustomerController {
     private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
 
     @GetMapping("/{customerId}")
-    public Mono<CustomerInformation> getCustomerInformation(@PathVariable Integer customerId) {
+    public Mono<CustomerInformation> getCustomerInformation(@PathVariable UUID customerId) {
         log.info("Retrieving customer information for customerId: {}", customerId);
 
         return customerService.getCustomerInformation(customerId)
@@ -33,7 +36,7 @@ public class CustomerController {
 
     @PostMapping("/{customerId}/trade")
     public Mono<StockTradeResponse> trade(
-            @PathVariable Integer customerId,
+            @PathVariable UUID customerId,
             @RequestBody Mono<StockTradeRequest> requestMono
     ) {
         return requestMono
@@ -50,21 +53,15 @@ public class CustomerController {
 
 
     @PostMapping
-    public Mono<CreateCustomerRequest> saveCustomer(@RequestBody Mono<CreateCustomerRequest> mono) {
+    public Mono<CreateCustomerResponse> saveCustomer(@RequestBody Mono<CreateCustomerRequest> mono) {
         return mono.transform(RequestValidator.validate())
                 .doOnNext(request -> log.info("Received customer creation request: {}", request))
                 .doOnError(validationError -> log.error("Validation failed for customer creation request", validationError))
-                .flatMap(validatedRequest ->
-                        customerService.saveCustomer(Mono.just(validatedRequest))
-                                .thenReturn(validatedRequest)
-                )
+                .flatMap(validatedRequest -> customerService.saveCustomer(Mono.just(validatedRequest)))
+                .doOnNext(response -> log.info("Successfully created customer with ID: {}", response.id()))
                 .onErrorResume(error -> {
-                    log.error("Unexpected error during customer creation process", error);
+                    log.error("Error during customer creation process", error);
                     return Mono.error(error);
                 });
     }
-
-
-
-
 }

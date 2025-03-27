@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 
 @RestController
 @RequestMapping("api/customers")
@@ -18,12 +20,12 @@ public class CustomerPortfolioController {
     private final CustomerPortfolioService customerPortfolioService;
 
     @GetMapping("/{customerId}")
-    public Mono<CustomerInformation> getCustomerInformation(@PathVariable Integer customerId) {
+    public Mono<CustomerInformation> getCustomerInformation(@PathVariable UUID customerId) {
         return this.customerPortfolioService.getCustomerInformation(customerId);
     }
 
     @PostMapping("/{customerId}/trade")
-    public Mono<StockTradeResponse> trade(@PathVariable Integer customerId, @RequestBody Mono<TradeRequest> mono) {
+    public Mono<StockTradeResponse> trade(@PathVariable UUID customerId, @RequestBody Mono<TradeRequest> mono) {
         return mono.transform(RequestValidator.validate())
                 .flatMap(req -> this.customerPortfolioService.trade(customerId, req));
     }

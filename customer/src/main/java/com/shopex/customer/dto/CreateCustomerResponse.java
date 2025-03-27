@@ -1,7 +1,9 @@
 package com.shopex.customer.dto;
 
+import java.util.UUID;
 
-public record CreateCustomerRequest(
+public record CreateCustomerResponse(
+        UUID id,
         String name,
         Integer balance
 ) {

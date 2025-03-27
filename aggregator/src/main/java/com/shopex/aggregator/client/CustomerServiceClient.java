@@ -15,6 +15,7 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import org.springframework.web.reactive.function.client.WebClientResponseException.BadRequest;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @AllArgsConstructor
 public class CustomerServiceClient {
@@ -22,7 +23,7 @@ public class CustomerServiceClient {
 
     private final WebClient client;
 
-    public Mono<CustomerInformation> getCustomerInformation(Integer customerId) {
+    public Mono<CustomerInformation> getCustomerInformation(UUID customerId) {
         return this.client.get()
                 .uri("/customers/{customerId}", customerId)
                 .retrieve()
@@ -30,7 +31,7 @@ public class CustomerServiceClient {
                 .onErrorResume(NotFound.class, ex -> GlobalExceptions.customerNotFound(customerId));
     }
 
-    public Mono<StockTradeResponse> trade(Integer customerId, StockTradeRequest request) {
+    public Mono<StockTradeResponse> trade(UUID customerId, StockTradeRequest request) {
         return this.client.post()
                 .uri("/customers/{customerId}/trade", customerId)
                 .bodyValue(request)
