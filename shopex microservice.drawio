@@ -1,0 +1,84 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.1.1 Chrome/132.0.6834.210 Electron/34.3.3 Safari/537.36" version="26.1.1">
+  <diagram name="Page-1" id="4KFR2kWCeijxK2zMIpY0">
+    <mxGraphModel dx="1034" dy="557" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-1" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="290" y="230" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-2" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="460" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-3" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="460" y="290" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-11" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="190" y="259.5" as="sourcePoint" />
+            <mxPoint x="290" y="259.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-12" value="" style="shape=message;html=1;outlineConnect=0;" parent="8PgAHHDL6ybROaUIPR1d-11" vertex="1">
+          <mxGeometry width="20" height="14" relative="1" as="geometry">
+            <mxPoint x="-10" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-19" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.annotation_2;align=left;labelPosition=right;pointerEvents=1;" parent="1" vertex="1">
+          <mxGeometry x="410" y="220" width="50" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-26" value="SHOPEX MICROSERVICE" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="280" y="60" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-27" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/users.svg;" parent="1" vertex="1">
+          <mxGeometry x="160" y="235" width="33" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-29" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/databases.svg;" parent="1" vertex="1">
+          <mxGeometry x="685.1" y="190.5" width="39.8" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-37" value="Aggregator Service" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="320" y="240" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-38" value="Customer Service" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="480" y="199.5" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-39" value="Stock Service" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="480" y="300.5" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-40" value="DB (Postgres)" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="750" y="190.5" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8PgAHHDL6ybROaUIPR1d-42" value="clients" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="133" y="290" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="pzsvleAysf-lNpO9Bhea-1" value="The Stock Service emits stock price changes periodically. The aggregator service will consume this and expose this SSE to the clients (Price stream)" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="480" y="390" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="pzsvleAysf-lNpO9Bhea-2" value="Clients/ Users can observe the price changes&amp;nbsp;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="30" y="339.5" width="230" height="30.5" as="geometry" />
+        </mxCell>
+        <mxCell id="pzsvleAysf-lNpO9Bhea-3" value="Users send Trade request to the aggregator service" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="20" y="179" width="230" height="30.5" as="geometry" />
+        </mxCell>
+        <mxCell id="pzsvleAysf-lNpO9Bhea-4" value="aggregator services first calls Stock Service for latest price before buy/sell" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="240" y="168.5" width="180" height="31" as="geometry" />
+        </mxCell>
+        <mxCell id="pzsvleAysf-lNpO9Bhea-5" value="aggregator services calls Customer Service to finish the buy/sell&amp;nbsp;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="245" y="89.5" width="180" height="60.5" as="geometry" />
+        </mxCell>
+        <mxCell id="PAE6oldgGo5bu31qLdYu-3" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="290" as="sourcePoint" />
+            <mxPoint x="500" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PAE6oldgGo5bu31qLdYu-4" value="Label" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" parent="PAE6oldgGo5bu31qLdYu-3" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PAE6oldgGo5bu31qLdYu-5" value="Source" style="edgeLabel;resizable=0;html=1;;align=left;verticalAlign=bottom;" parent="PAE6oldgGo5bu31qLdYu-3" connectable="0" vertex="1">
+          <mxGeometry x="-1" relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
